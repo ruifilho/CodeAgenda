@@ -11,6 +11,26 @@
 |
 */
 
+$app->get('/contato/novo', [
+    'as' => 'pessoa.create',
+    'uses' => 'ContatoController@create'
+]);
+
+$app->post('/contato', [
+    'as' => 'pessoa.store',
+    'uses' => 'ContatoController@store'
+]);
+
+$app->get('/contato/{id}/editar', [
+    'as' => 'pessoa.edit',
+    'uses' => 'ContatoController@edit'
+]);
+
+$app->put('/contato/{id}', [
+    'as' => 'pessoa.update',
+    'uses' => 'ContatoController@update'
+]);
+
 $app->get('/', [
     'as' => 'agenda.index',
     'uses' => 'AgendaController@index'
@@ -27,11 +47,21 @@ $app->post('/busca', [
 ]);
 
 $app->get('/contato/{id}/apagar', [
+    'as' => 'contato.delete',
+    'uses' => 'ContatoController@delete'
+]);
+
+$app->delete('/contato/{id}', [
     'as' => 'contato.destroy',
     'uses' => 'ContatoController@destroy'
 ]);
 
 $app->get('/telefone/{id}/apagar', [
+    'as' => 'telefone.delete',
+    'uses' => 'TelefoneController@delete'
+]);
+
+$app->delete('/telefone/{id}', [
     'as' => 'telefone.destroy',
     'uses' => 'TelefoneController@destroy'
 ]);

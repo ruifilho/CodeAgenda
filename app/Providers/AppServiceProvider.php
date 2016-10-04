@@ -2,6 +2,7 @@
 
 namespace CodeAgenda\Providers;
 
+use CodeAgenda\Entities\Pessoa;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,8 +12,23 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    public function boot(){
+        view()->share(['letras' => $this->getLetras()]);
+    }
+
     public function register()
     {
         //
+    }
+
+    protected function getLetras(){
+        $letras = [];
+        foreach(Pessoa::all() as $pessoa){
+            $letras[] = strtoupper(substr($pessoa->apelido,0,1));
+        }
+        sort ($letras);
+
+        return array_unique($letras);
     }
 }
